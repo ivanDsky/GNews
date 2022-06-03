@@ -2,6 +2,7 @@
 <resources>
     <color name="orange_500">#FFF68F54</color>
     <color name="red_500">#FFFF5B6F</color>
+    <color name="grey_100">#FFF7F7F7</color>
     <color name="grey_500">#FF939DAE</color>
     <color name="grey_700">#FF1E1F21</color>
     <color name="white">#FFFFFFFF</color>

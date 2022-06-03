@@ -11,6 +11,9 @@
         <item name="colorSecondary">@color/orange_500</item>
         <item name="colorSecondaryVariant">@color/orange_500</item>
         <item name="colorOnSecondary">@color/white</item>
+        <!-- Surface color. -->
+        <item name="colorSurface">@color/grey_100</item>
+        <item name="colorSurfaceVariant">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

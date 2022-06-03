@@ -2,7 +2,15 @@
 <resources>
     <dimen name="extraSmall">4dp</dimen>
     <dimen name="small">8dp</dimen>
-    <dimen name="normal">12dp</dimen>
-    <dimen name="large">16dp</dimen>
-    <dimen name="extraLarge">24dp</dimen>
+    <dimen name="normal">16dp</dimen>
+    <dimen name="large">20dp</dimen>
+    <dimen name="extraLarge">32dp</dimen>
+
+    <dimen name="searchItemRadius">24dp</dimen>
+    <dimen name="searchItemHeight">48dp</dimen>
+    <dimen name="searchIconPadding">-12dp</dimen>
+
+    <dimen name="appBarRadius">20dp</dimen>
+
+    <dimen name="elevation">4dp</dimen>
 </resources>
