@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BindingFragment<out VB : ViewBinding> : Fragment(){
 	private var _binding: VB? = null
-	val binding : VB = checkNotNull(_binding)
+	protected val binding : VB get() = checkNotNull(_binding)
 	
 	abstract fun inflateBinding(inflater: LayoutInflater) : VB
 	
