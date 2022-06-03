@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Header">
+        <item name="fontFamily">@font/os_bold</item>
+        <item name="android:textSize">@dimen/textHeader</item>
+    </style>
+</resources>
