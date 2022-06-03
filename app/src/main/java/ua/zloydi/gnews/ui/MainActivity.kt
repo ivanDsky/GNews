@@ -1,7 +1,8 @@
-package ua.zloydi.template
+package ua.zloydi.gnews.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import ua.zloydi.gnews.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
