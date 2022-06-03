@@ -6,11 +6,14 @@
     <dimen name="large">20dp</dimen>
     <dimen name="extraLarge">32dp</dimen>
 
-    <dimen name="searchItemRadius">24dp</dimen>
-    <dimen name="searchItemHeight">48dp</dimen>
+    <dimen name="searchRadius">24dp</dimen>
+    <dimen name="searchHeight">48dp</dimen>
     <dimen name="searchIconPadding">-12dp</dimen>
 
     <dimen name="appBarRadius">20dp</dimen>
+    <dimen name="appBarHeight">64dp</dimen>
+
+    <dimen name="bottomNavigationHeight">48dp</dimen>
 
     <dimen name="elevation">4dp</dimen>
 </resources>

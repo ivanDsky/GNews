@@ -13,4 +13,9 @@
         <item name="android:elevation">@dimen/elevation</item>
     </style>
 
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/textBottomNavigation</item>
+        <item name="android:fontFamily">@font/os_semi_bold</item>
+    </style>
+
 </resources>
