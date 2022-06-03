@@ -12,7 +12,7 @@
         android:id="@+id/queryLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/searchItemHeight"
+        android:layout_height="@dimen/searchHeight"
         android:layout_marginHorizontal="@dimen/small"
         android:layout_weight="1"
         app:hintEnabled="false"
@@ -34,8 +34,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnFilter"
-        android:layout_width="@dimen/searchItemHeight"
-        android:layout_height="@dimen/searchItemHeight"
+        android:layout_width="@dimen/searchHeight"
+        android:layout_height="@dimen/searchHeight"
         android:layout_marginHorizontal="@dimen/small"
         android:background="@drawable/background_search_item"
         android:padding="@dimen/normal"
@@ -44,8 +44,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSort"
-        android:layout_width="@dimen/searchItemHeight"
-        android:layout_height="@dimen/searchItemHeight"
+        android:layout_width="@dimen/searchHeight"
+        android:layout_height="@dimen/searchHeight"
         android:layout_marginHorizontal="@dimen/small"
         android:background="@drawable/background_search_item"
         android:padding="@dimen/normal"
