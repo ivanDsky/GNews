@@ -35,19 +35,6 @@
             app:srcCompat="@drawable/ic_logo" />
     </FrameLayout>
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/header"
-        style="@style/Header"
-        android:text="@string/news"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/extraLarge"
-        app:layout_constraintEnd_toEndOf="@id/rightBorder"
-        app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/appBar"
-        tools:text="@tools:sample/cities" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/articles"
         android:layout_width="0dp"

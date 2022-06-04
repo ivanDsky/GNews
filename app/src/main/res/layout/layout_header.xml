@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/header"
+    style="@style/Header"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/extraLarge"
+    android:text="@string/news"
+    app:layout_constraintEnd_toEndOf="@id/rightBorder"
+    app:layout_constraintStart_toStartOf="@id/leftBorder"
+    app:layout_constraintTop_toBottomOf="@id/appBar" />
