@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?colorSurfaceVariant">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/fromDateHeader"
+        style="@style/DateText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/date" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/inputDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/small"
+        android:hint="@string/hint_date"
+        android:textColor="?colorOnPrimary"
+        android:textColorHint="?colorOnPrimarySurface"
+        android:textSize="@dimen/textNormal"
+        app:layout_constraintEnd_toStartOf="@id/ivCalendar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fromDateHeader" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCalendar"
+        android:layout_width="@dimen/normal"
+        android:layout_height="@dimen/normal"
+        app:layout_constraintBottom_toBottomOf="@id/inputDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/inputDate"
+        app:srcCompat="@drawable/ic_calendar"
+        app:tint="?colorSecondary" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/small"
+        android:background="?colorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputDate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
