@@ -14,7 +14,7 @@ class ArticlesAdapter : ListAdapter<ArticleUI, ArticlesAdapter.ViewHolder>(Artic
 		parent: ViewGroup, viewType: Int
 	): ViewHolder {
 		val inflater = LayoutInflater.from(parent.context)
-		return ViewHolder(LayoutArticlesItemBinding.inflate(inflater))
+		return ViewHolder(LayoutArticlesItemBinding.inflate(inflater, parent, false))
 	}
 	
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {

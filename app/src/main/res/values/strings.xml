@@ -2,4 +2,7 @@
     <string name="app_name">News</string>
     <string name="news">News</string>
     <string name="search">Search</string>
+    <string name="clear">Clear</string>
+    <string name="date">Date</string>
+    <string name="hint_date">yyyy/mm/dd</string>
 </resources>

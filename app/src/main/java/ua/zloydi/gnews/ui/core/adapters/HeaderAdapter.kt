@@ -8,7 +8,7 @@ import ua.zloydi.gnews.databinding.LayoutHeaderBinding
 class HeaderAdapter(private val title: String) : RecyclerView.Adapter<HeaderAdapter.ViewHolder>() {
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 		val inflater = LayoutInflater.from(parent.context)
-		return ViewHolder(LayoutHeaderBinding.inflate(inflater), title)
+		return ViewHolder(LayoutHeaderBinding.inflate(inflater, parent, false), title)
 	}
 	
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {}

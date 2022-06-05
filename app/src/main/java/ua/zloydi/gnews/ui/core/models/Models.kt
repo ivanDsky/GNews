@@ -10,7 +10,7 @@ data class ArticleUI(
 	val onClick: () -> Unit = {},
 )
 
-class ArticleUIDiff() : DiffUtil.ItemCallback<ArticleUI>() {
+class ArticleUIDiff : DiffUtil.ItemCallback<ArticleUI>() {
 	override fun areItemsTheSame(oldItem: ArticleUI, newItem: ArticleUI) =
 		oldItem.header == newItem.header && oldItem.description == newItem.description && oldItem.image == newItem.image
 	
