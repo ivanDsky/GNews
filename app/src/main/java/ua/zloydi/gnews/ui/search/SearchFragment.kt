@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.OnEditorActionListener
 import androidx.core.content.getSystemService
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.commit
 import androidx.fragment.app.setFragmentResultListener
@@ -137,9 +138,9 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 	}
 	
 	private fun bindSearchState(searchState: SearchedState) = with(binding.searchBar) {
-		if (binding.searchBar.queryEditText.text.toString() != searchState.q) binding.searchBar.queryEditText.setText(
-			searchState.q
-		)
+		if (queryEditText.text.toString() != searchState.q) queryEditText.setText(searchState.q)
+		filterCnt.text = searchState.filter.toString()
+		filterCnt.isVisible = searchState.filter > 0
 	}
 	
 	private fun filter() {

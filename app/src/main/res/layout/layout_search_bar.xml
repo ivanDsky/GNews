@@ -34,15 +34,33 @@
             android:textSize="@dimen/textNormal" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnFilter"
+    <FrameLayout
         android:layout_width="@dimen/searchHeight"
         android:layout_height="@dimen/searchHeight"
-        android:layout_marginHorizontal="@dimen/small"
-        android:background="@drawable/background_search_item"
-        android:padding="@dimen/normal"
-        app:srcCompat="@drawable/ic_filter"
-        app:tint="?colorOnPrimary" />
+        android:layout_marginHorizontal="@dimen/small">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnFilter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_search_item"
+            android:padding="@dimen/normal"
+            app:srcCompat="@drawable/ic_filter"
+            app:tint="?colorOnPrimary" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/filterCnt"
+            android:layout_width="@dimen/normal"
+            android:layout_height="@dimen/normal"
+            android:layout_gravity="top|end"
+            android:background="@drawable/background_filter_count"
+            android:fontFamily="@font/os_bold"
+            android:gravity="center"
+            android:textColor="?colorOnSecondary"
+            android:textSize="@dimen/textSmall" />
+
+    </FrameLayout>
+
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSort"
