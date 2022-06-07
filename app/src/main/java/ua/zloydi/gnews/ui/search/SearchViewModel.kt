@@ -55,10 +55,7 @@ class SearchViewModel @Inject constructor(
 	val searchState = _searchState.asStateFlow()
 	
 	init {
-		viewModelScope.launch {
-			val history = getHistory()
-			if (_state.value is State.Empty) _state.value = State.ShowHistory(history.toUI())
-		}
+		setHistoryScreen()
 	}
 	
 	private suspend fun getHistory() = withContext(Dispatchers.IO) {
@@ -73,8 +70,17 @@ class SearchViewModel @Inject constructor(
 		}
 	}
 	
+	fun isSearchEmpty() = _queryState.value.q.isBlank()
+	
+	fun setHistoryScreen() = viewModelScope.launch {
+		updateQuery("")
+		_state.value = State.Empty()
+		val history = getHistory()
+		if (_state.value is State.Empty) _state.value = State.ShowHistory(history.toUI())
+	}
+	
 	fun search() = viewModelScope.launch {
-		if (_queryState.value.q.isBlank()) return@launch
+		if (isSearchEmpty()) return@launch
 		_state.value = State.Loading()
 		addQuery(_queryState.value)
 		val articlesResult = articlesRepository.getArticles(_queryState.value)

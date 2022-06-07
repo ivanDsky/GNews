@@ -39,6 +39,7 @@ class SortFragmentDialog : BindingBottomSheetFragment<BottomDialogSortBinding>()
 	
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 		val dialog = BottomSheetDialog(requireContext(), theme)
+		dialog.window?.setDimAmount(0f)
 		dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 		return dialog
 	}

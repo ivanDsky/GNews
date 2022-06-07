@@ -14,6 +14,8 @@
         android:layout_height="@dimen/searchHeight"
         android:layout_marginHorizontal="@dimen/small"
         android:layout_weight="1"
+        android:theme="@style/InputText"
+        app:hintAnimationEnabled="false"
         app:hintEnabled="false"
         app:startIconDrawable="@drawable/ic_search"
         app:startIconTint="?colorOnPrimary">

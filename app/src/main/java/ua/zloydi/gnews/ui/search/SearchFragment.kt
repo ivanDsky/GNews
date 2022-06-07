@@ -1,5 +1,6 @@
 package ua.zloydi.gnews.ui.search
 
+import android.content.res.ColorStateList
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +8,16 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.OnEditorActionListener
+import androidx.activity.addCallback
+import androidx.annotation.AttrRes
 import androidx.core.content.getSystemService
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.commit
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +38,7 @@ import ua.zloydi.gnews.ui.core.adapters.decorators.HeaderBodyDecorator
 import ua.zloydi.gnews.ui.filter.FilterFragment
 import ua.zloydi.gnews.ui.sort.SortFragmentDialog
 import ua.zloydi.gnews.utils.Snackbar
+import ua.zloydi.gnews.utils.getThemeColor
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
@@ -49,6 +55,14 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 			launch { viewModel.state.collect(::bindState) }
 			launch { viewModel.searchState.collect(::bindSearchState) }
 			launch { viewModel.oneShot.collect(::bindOneShot) }
+		}
+		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+			if (!viewModel.isSearchEmpty())
+				viewModel.setHistoryScreen()
+			else{
+				remove()
+				requireActivity().onBackPressed()
+			}
 		}
 	}
 	
@@ -115,7 +129,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 		val normalDp = resources.getDimensionPixelSize(R.dimen.normal)
 		HeaderBodyDecorator(
 			headerRect = Rect(normalDp, normalDp, normalDp, normalDp),
-			itemRect = Rect(normalDp, normalDp / 2, normalDp, normalDp / 2),
+			itemRect = Rect(normalDp, 0, normalDp, 0),
 		)
 	}
 	
@@ -169,11 +183,28 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 	private fun sort() {
 		val sortFragment = SortFragmentDialog.create(viewModel.getSort())
 		sortFragment.show(parentFragmentManager, null)
+		sortFragment.lifecycle.addObserver(object : DefaultLifecycleObserver {
+			override fun onStart(owner: LifecycleOwner) {
+				super.onStart(owner)
+				binding.searchBar.btnSort.backgroundTintList = getColorList(R.attr.colorSecondary)
+				binding.searchBar.btnSort.imageTintList = getColorList(R.attr.colorOnSecondary)
+			}
+			
+			override fun onStop(owner: LifecycleOwner) {
+				super.onStop(owner)
+				binding.searchBar.btnSort.backgroundTintList = getColorList(R.attr.colorSurfaceVariant)
+				binding.searchBar.btnSort.imageTintList = getColorList(R.attr.colorOnPrimary)
+			}
+		})
 		sortFragment.setFragmentResultListener(SortFragmentDialog.RESULT) { _, res ->
 			viewModel.updateSort(res[SortFragmentDialog.RESULT] as Sort)
 			viewModel.search()
 		}
 	}
+	
+	private fun getColorList(@AttrRes res: Int) =
+		ColorStateList.valueOf(requireContext().getThemeColor(res))
+	
 	
 	private fun search() {
 		requireContext().getSystemService<InputMethodManager>()

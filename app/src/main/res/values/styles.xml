@@ -19,14 +19,16 @@
         <item name="android:textColor">?colorSecondary</item>
     </style>
 
-    <style name="DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
-        <item name="colorPrimary">?colorSecondary</item>
-        <item name="colorOnPrimary">?colorOnSecondary</item>
-        <item name="colorPrimarySurface">@color/white</item>
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/grey_700</item>
+    <style name="DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/orange_500</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSurface">@color/orange_500</item>
     </style>
 
+
+    <style name="InputText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="colorPrimary">?colorSecondary</item>
+    </style>
 
     <style name="AppBar">
         <item name="android:layout_width">0dp</item>
