@@ -3,5 +3,5 @@
     <corners
         android:bottomLeftRadius="@dimen/appBarRadius"
         android:bottomRightRadius="@dimen/appBarRadius" />
-    <solid android:color="?colorSurfaceVariant" />
+    <solid android:color="?colorSurface" />
 </shape>

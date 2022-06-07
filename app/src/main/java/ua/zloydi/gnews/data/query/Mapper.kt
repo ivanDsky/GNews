@@ -9,7 +9,7 @@ private const val TO = "to"
 private const val SEARCH_IN = "in"
 private const val SORT = "sortby"
 
-private fun Date.toQuery(simpleDateFormat: SimpleDateFormat) : String{
+private fun Date.toQuery(simpleDateFormat: SimpleDateFormat): String {
 	return simpleDateFormat.format(this)
 }
 
@@ -21,13 +21,15 @@ fun List<SearchIn>.toQuery(): String = buildString {
 	deleteCharAt(lastIndex)
 }
 
-fun Filter.toQueryMap(): Map<String, String>{
+fun Filter.toQueryMap(): Map<String, String> {
 	val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
-	return mapOf(
-		FROM to from.toQuery(dateFormat),
-		TO to to.toQuery(dateFormat),
-		SEARCH_IN to searchIn.toQuery()
-	)
+	return buildMap {
+		if (from != null) put(FROM, from.toQuery(dateFormat))
+		if (to != null) put(TO, to.toQuery(dateFormat))
+		if (searchIn.isNotEmpty()) put(
+			SEARCH_IN, searchIn.toQuery()
+		)
+	}
 }
 
 fun Query.toQueryMap(): Map<String, String> = buildMap {

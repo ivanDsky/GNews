@@ -16,7 +16,7 @@
         android:textSize="@dimen/textNormal" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnSort"
+        android:id="@+id/button"
         android:layout_width="@dimen/normal"
         android:layout_height="@dimen/normal"
         android:layout_gravity="center_vertical|end"

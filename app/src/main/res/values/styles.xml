@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Header">
         <item name="fontFamily">@font/os_bold</item>
         <item name="android:textSize">@dimen/textHeader</item>
         <item name="android:textColor">?colorOnPrimary</item>
     </style>
+
     <style name="NormalText">
         <item name="fontFamily">@font/os_semi_bold</item>
         <item name="android:textSize">@dimen/textNormal</item>
         <item name="android:textColor">?colorOnPrimary</item>
     </style>
+
     <style name="DateText">
         <item name="fontFamily">@font/os_semi_bold</item>
         <item name="android:textSize">@dimen/textSmall</item>
         <item name="android:textColor">?colorSecondary</item>
+    </style>
+
+    <style name="DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">?colorSecondary</item>
+        <item name="colorOnPrimary">?colorOnSecondary</item>
+        <item name="colorPrimarySurface">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/grey_700</item>
     </style>
 
 
@@ -27,6 +38,15 @@
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/textSmall</item>
         <item name="android:fontFamily">@font/os_semi_bold</item>
+    </style>
+
+    <style name="Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textSize">@dimen/textNormal</item>
+        <item name="android:fontFamily">@font/os_bold</item>
+        <item name="android:backgroundTint">?colorSecondary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">?colorOnSecondary</item>
+        <item name="cornerRadius">@dimen/button_height</item>
     </style>
 
 </resources>

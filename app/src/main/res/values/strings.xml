@@ -3,6 +3,16 @@
     <string name="news">News</string>
     <string name="search">Search</string>
     <string name="clear">Clear</string>
+    <string name="filter">Filter</string>
     <string name="date">Date</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
     <string name="hint_date">yyyy/mm/dd</string>
+    <string name="search_in">Search In</string>
+    <string name="all">All</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="content">Content</string>
+    <string name="apply">Apply</string>
+    <string name="apply_filter">Apply filter</string>
 </resources>

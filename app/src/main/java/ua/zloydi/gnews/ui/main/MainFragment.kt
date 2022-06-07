@@ -7,7 +7,7 @@ import androidx.fragment.app.commit
 import ua.zloydi.gnews.R
 import ua.zloydi.gnews.databinding.FragmentMainBinding
 import ua.zloydi.gnews.ui.core.BindingFragment
-import ua.zloydi.gnews.ui.headlines.HeadlinesFragment
+import ua.zloydi.gnews.ui.filter.FilterFragment
 
 class MainFragment : BindingFragment<FragmentMainBinding>() {
 	override fun inflateBinding(inflater: LayoutInflater) = FragmentMainBinding.inflate(inflater)
@@ -16,7 +16,7 @@ class MainFragment : BindingFragment<FragmentMainBinding>() {
 		super.onViewCreated(view, savedInstanceState)
 		if (savedInstanceState == null) {
 			childFragmentManager.commit {
-				replace(R.id.container, HeadlinesFragment())
+				replace(R.id.container, FilterFragment())
 			}
 		}
 	}

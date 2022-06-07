@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorSurfaceVariant">
+    android:background="?colorSurface">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/fromDateHeader"
+        android:id="@+id/dateHeader"
         style="@style/DateText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -16,18 +16,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/date" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/inputDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/small"
         android:layout_marginEnd="@dimen/small"
-        android:hint="@string/hint_date"
-        android:textColor="?colorOnPrimary"
-        android:textColorHint="?colorOnPrimarySurface"
+        android:textColor="?colorOnPrimarySurface"
+        app:layout_constraintTop_toBottomOf="@id/dateHeader"
         android:textSize="@dimen/textNormal"
         app:layout_constraintEnd_toStartOf="@id/ivCalendar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fromDateHeader" />
+        tools:text="@string/hint_date" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivCalendar"
@@ -41,8 +41,8 @@
 
     <View
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/small"
+        android:layout_height="@dimen/separator"
+        android:layout_marginTop="@dimen/normal"
         android:background="?colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
