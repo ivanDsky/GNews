@@ -18,12 +18,15 @@
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/swtch"
-        style="@style/NormalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="?colorOnPrimarySurface"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@null"
+        android:button="@drawable/ic_switch"
+        android:thumb="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:track="@null" />
 
     <View
         android:layout_width="0dp"

@@ -49,7 +49,7 @@ class FilterViewModel(private val resources: Resources, filter: Filter?) : ViewM
 	fun getResult() = result
 	
 	private fun List<SearchIn>.toUI(): String? {
-		if (isEmpty() || size == SearchIn.values().size) return null
+		if (isEmpty()) return null
 		return buildString {
 			forEach { it: SearchIn -> append("${resources.getString(it.res)}, ") }
 			deleteRange(length - 2, length)

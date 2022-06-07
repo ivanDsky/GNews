@@ -10,14 +10,18 @@ data class SearchInState(
 	val searchIn: SearchIn, val isEnabled: Boolean
 ) : java.io.Serializable
 
-private const val ENABLED_DEFAULT = true
+private val DEFAULT_SEARCH_IN = listOf(
+	SearchInState(SearchIn.TITLE, true),
+	SearchInState(SearchIn.DESCRIPTION, true),
+	SearchInState(SearchIn.CONTENT, false)
+)
 
 class SearchInViewModel(startList: List<SearchIn>) : ViewModel() {
 	private val _state: MutableStateFlow<List<SearchInState>>
 	
 	init {
 		val initList = if (startList.isEmpty()) {
-			SearchIn.values().map { SearchInState(it, ENABLED_DEFAULT) }
+			DEFAULT_SEARCH_IN
 		} else {
 			SearchIn.values().map { SearchInState(it, startList.contains(it)) }
 		}
@@ -34,10 +38,10 @@ class SearchInViewModel(startList: List<SearchIn>) : ViewModel() {
 	}
 	
 	fun clearAll() {
-		_state.value = _state.value.map { it.copy(isEnabled = ENABLED_DEFAULT) }
+		_state.value = DEFAULT_SEARCH_IN
 	}
 	
-	fun getResult(): List<SearchIn> = _state.value.filter { it.isEnabled }.map { it.searchIn }
+	fun getResult() = _state.value.filter { it.isEnabled }.map { it.searchIn }
 	
 	class Factory(private val startList: List<SearchIn>) : ViewModelProvider.Factory {
 		override fun <T : ViewModel> create(modelClass: Class<T>): T {

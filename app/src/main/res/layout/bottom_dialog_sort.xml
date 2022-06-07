@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/small" />
+        app:layout_constraintGuide_begin="@dimen/normal" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/rightBorder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/small" />
+        app:layout_constraintGuide_end="@dimen/normal" />
 
 
     <include

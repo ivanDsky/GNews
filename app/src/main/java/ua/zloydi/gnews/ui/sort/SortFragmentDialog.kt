@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.flow.collect
 import ua.zloydi.gnews.R
 import ua.zloydi.gnews.data.query.Sort
@@ -37,14 +38,17 @@ class SortFragmentDialog : BindingBottomSheetFragment<BottomDialogSortBinding>()
 	}
 	
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val dialog = super.onCreateDialog(savedInstanceState)
+		val dialog = BottomSheetDialog(requireContext(), theme)
 		dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 		return dialog
 	}
 	
+	override fun getTheme() = R.style.BaseBottomSheetDialog
+	
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		bindStable()
+		setStyle(STYLE_NORMAL, R.style.BaseBottomSheetDialog)
 		lifecycleScope.launchWhenStarted {
 			viewModel.state.collect(::bindState)
 		}

@@ -17,7 +17,6 @@ import ua.zloydi.gnews.data.models.ArticleDTO
 import ua.zloydi.gnews.data.models.HistoryQuery
 import ua.zloydi.gnews.data.query.Filter
 import ua.zloydi.gnews.data.query.Query
-import ua.zloydi.gnews.data.query.SearchIn
 import ua.zloydi.gnews.data.query.Sort
 import ua.zloydi.gnews.data.repository.ArticlesRepository
 import ua.zloydi.gnews.data.repository.SearchHistoryRepository
@@ -109,7 +108,7 @@ class SearchViewModel @Inject constructor(
 		var ret = 0
 		if (from != null) ret++
 		if (to != null) ret++
-		if (searchIn.isNotEmpty() && searchIn.size != SearchIn.values().size) ret++
+		if (searchIn.isNotEmpty()) ret++
 		return ret
 	}
 	

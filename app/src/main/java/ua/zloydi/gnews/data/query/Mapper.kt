@@ -15,14 +15,14 @@ private fun Date.toQuery(simpleDateFormat: SimpleDateFormat): String {
 
 fun List<SearchIn>.toQuery(): String = buildString {
 	this@toQuery.forEach {
-		append(it)
+		append(it.queryName)
 		append(',')
 	}
 	deleteCharAt(lastIndex)
 }
 
 fun Filter.toQueryMap(): Map<String, String> {
-	val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+	val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
 	return buildMap {
 		if (from != null) put(FROM, from.toQuery(dateFormat))
 		if (to != null) put(TO, to.toQuery(dateFormat))

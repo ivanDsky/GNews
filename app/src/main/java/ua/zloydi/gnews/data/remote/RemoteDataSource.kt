@@ -17,27 +17,33 @@ class RemoteDataSource @Inject constructor(
 ) : ReadArticlesDataSource {
 	override suspend fun getArticles(query: Query): Result<ArticleListDTO> =
 		withContext(Dispatchers.IO) {
-			handleResponse(remoteService.getArticles(query.toQueryMap()))
+			handleResponse { remoteService.getArticles(query.toQueryMap()) }
 		}
 	
 	override suspend fun getHeadlineArticles(): Result<ArticleListDTO> =
 		withContext(Dispatchers.IO) {
-			handleResponse(remoteService.getHeadlineArticles(emptyMap()))
+			handleResponse { remoteService.getHeadlineArticles(emptyMap()) }
 		}
 	
-	private fun <T> handleResponse(response: Response<T>) = try {
-		when {
-			response.isSuccessful.not() -> Result.failure(
-				NetworkError.getErrorByCode(
-					response.code(), response.errorBody()
-				)
-			)
-			response.body() == null     -> Result.failure(IllegalStateException("Empty response"))
-			else                        -> Result.success(response.body()!!)
+	private suspend fun <T> handleResponse(tryResponse: suspend () -> Response<T>) =
+		withContext(Dispatchers.IO) {
+			val response = tryResponse()
+			try {
+				when {
+					response.isSuccessful.not() -> Result.failure(
+						NetworkError.getErrorByCode(
+							response.code(), response.errorBody()
+						)
+					)
+					response.body() == null     -> Result.failure(IllegalStateException("Empty response"))
+					else                        -> Result.success(response.body()!!)
+				}
+			} catch (networkException: IllegalStateException) {
+				Result.failure(networkException)
+			} catch (ioException: IOException) {
+				Result.failure(ioException)
+			} catch (exception: Exception) {
+				Result.failure(exception)
+			}
 		}
-	} catch (networkException: IllegalStateException){
-		Result.failure(networkException)
-	} catch (ioException: IOException) {
-		Result.failure(ioException)
-	}
 }

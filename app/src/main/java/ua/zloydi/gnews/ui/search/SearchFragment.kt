@@ -94,10 +94,21 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 	}
 	
 	private fun bindState(state: State) = when (state) {
-		is State.Empty        -> {}
-		is State.Loading      -> {}
-		is State.ShowArticles -> bindArticles(state)
-		is State.ShowHistory  -> bindHistory(state)
+		is State.Empty        -> setLoading(true)
+		is State.Loading      -> setLoading(true)
+		is State.ShowArticles -> {
+			bindArticles(state)
+			setLoading(false)
+		}
+		is State.ShowHistory  -> {
+			bindHistory(state)
+			setLoading(false)
+		}
+	}
+	
+	private fun setLoading(isLoading: Boolean) {
+		binding.progress.isVisible = isLoading
+		binding.adapter.isVisible = !isLoading
 	}
 	
 	private val historyDecorator: HeaderBodyDecorator by lazy {
