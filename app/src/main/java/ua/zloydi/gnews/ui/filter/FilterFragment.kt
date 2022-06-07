@@ -19,6 +19,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import ua.zloydi.gnews.R
+import ua.zloydi.gnews.data.query.Filter
 import ua.zloydi.gnews.data.query.SearchIn
 import ua.zloydi.gnews.databinding.FragmentFilterBinding
 import ua.zloydi.gnews.ui.core.BindingFragment
@@ -32,12 +33,21 @@ import kotlin.coroutines.suspendCoroutine
 class FilterFragment : BindingFragment<FragmentFilterBinding>() {
 	companion object {
 		const val RESULT = "Filter result"
+		private const val INPUT = "Filter input"
+		
+		fun create(filter: Filter?): FilterFragment {
+			return FilterFragment().apply {
+				arguments = bundleOf(INPUT to filter)
+			}
+		}
 	}
 	
 	override fun inflateBinding(inflater: LayoutInflater) =
 		FragmentFilterBinding.inflate(layoutInflater)
 	
-	private val viewModel: FilterViewModel by viewModels()
+	private val viewModel: FilterViewModel by viewModels{
+		FilterViewModel.Factory(resources, requireArguments()[INPUT] as Filter?)
+	}
 	
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
@@ -45,7 +55,7 @@ class FilterFragment : BindingFragment<FragmentFilterBinding>() {
 		lifecycleScope.launchWhenStarted {
 			viewModel.state.collect(::bindState)
 		}
-		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
 			parentFragmentManager.popBackStack()
 		}
 	}
@@ -66,9 +76,9 @@ class FilterFragment : BindingFragment<FragmentFilterBinding>() {
 	
 	@Suppress("UNCHECKED_CAST")
 	private fun onSearchInClick() = lifecycleScope.launchWhenStarted {
-		val searchInFragment = SearchInFragment()
-		parentFragmentManager.commit {
-			add(R.id.container, searchInFragment, null)
+		val searchInFragment = SearchInFragment.create(viewModel.getResult().searchIn)
+		requireActivity().supportFragmentManager.commit {
+			add(R.id.activityContainer, searchInFragment, null)
 			addToBackStack(null)
 		}
 		searchInFragment.setFragmentResultListener(SearchInFragment.RESULT) { _, res ->

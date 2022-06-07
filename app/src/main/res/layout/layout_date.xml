@@ -18,15 +18,14 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/inputDate"
+        style="@style/NormalText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/small"
         android:layout_marginEnd="@dimen/small"
-        android:textColor="?colorOnPrimarySurface"
-        app:layout_constraintTop_toBottomOf="@id/dateHeader"
-        android:textSize="@dimen/textNormal"
         app:layout_constraintEnd_toStartOf="@id/ivCalendar"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateHeader"
         tools:text="@string/hint_date" />
 
     <androidx.appcompat.widget.AppCompatImageView

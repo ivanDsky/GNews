@@ -17,9 +17,18 @@ import ua.zloydi.gnews.ui.core.BindingFragment
 class SearchInFragment : BindingFragment<FragmentSearchInBinding>() {
 	companion object {
 		const val RESULT = "Search in result"
+		private const val INPUT = "Search in input"
+		
+		fun create(searchInList: List<SearchIn>): SearchInFragment {
+			return SearchInFragment().apply {
+				arguments = bundleOf(INPUT to searchInList)
+			}
+		}
 	}
 	
-	private val viewModel: SearchInViewModel by viewModels()
+	private val viewModel: SearchInViewModel by viewModels {
+		SearchInViewModel.Factory(requireArguments()[INPUT] as List<SearchIn>)
+	}
 	
 	private var mapper: Map<SearchIn, LayoutTitleSwitchBinding>? = null
 	override fun inflateBinding(inflater: LayoutInflater) =
@@ -53,7 +62,7 @@ class SearchInFragment : BindingFragment<FragmentSearchInBinding>() {
 		mapper?.forEach { bindSwitch(it.key, it.value) }
 		
 		btnBack.setOnClickListener { requireActivity().onBackPressed() }
-		btnClear.button.setOnClickListener { viewModel.clearAll() }
+		btnClear.root.setOnClickListener { viewModel.clearAll() }
 		btnApply.setOnClickListener { onApply() }
 	}
 	

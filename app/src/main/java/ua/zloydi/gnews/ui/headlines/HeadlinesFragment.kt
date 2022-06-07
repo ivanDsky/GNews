@@ -8,14 +8,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import ua.zloydi.gnews.R
 import ua.zloydi.gnews.databinding.FragmentHeadlinesBinding
+import ua.zloydi.gnews.ui.article.ArticleFragment
 import ua.zloydi.gnews.ui.core.BindingFragment
+import ua.zloydi.gnews.ui.core.OneShot
 import ua.zloydi.gnews.ui.core.adapters.ArticlesAdapter
 import ua.zloydi.gnews.ui.core.adapters.HeaderAdapter
+import ua.zloydi.gnews.ui.core.adapters.decorators.HeaderBodyDecorator
+import ua.zloydi.gnews.utils.Snackbar
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
@@ -29,7 +33,8 @@ class HeadlinesFragment : BindingFragment<FragmentHeadlinesBinding>() {
 		super.onViewCreated(view, savedInstanceState)
 		bindStable()
 		lifecycleScope.launchWhenStarted {
-			viewModel.state.collect(::bindState)
+			launch { viewModel.state.collect(::bindState) }
+			launch { viewModel.oneShot.collect(::bindOneShot) }
 		}
 	}
 	
@@ -41,21 +46,29 @@ class HeadlinesFragment : BindingFragment<FragmentHeadlinesBinding>() {
 		articles.adapter = ConcatAdapter(
 			HeaderAdapter(getString(R.string.news)), articlesAdapter
 		)
-		articles.addItemDecoration(object : RecyclerView.ItemDecoration(){
-			override fun getItemOffsets(
-				outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
-			) {
-				super.getItemOffsets(outRect, view, parent, state)
-				outRect.set(0,20,0,20)
-			}
-		})
+		val normalDp = resources.getDimensionPixelSize(R.dimen.normal)
+		val smallDp = resources.getDimensionPixelSize(R.dimen.small)
+		articles.addItemDecoration(
+			HeaderBodyDecorator(
+				headerRect = Rect(normalDp, normalDp, normalDp, normalDp),
+				itemRect = Rect(normalDp, smallDp / 2, normalDp, smallDp / 2),
+			)
+		)
 	}
 	
 	private fun bindState(state: State) {
 		when (state) {
 			State.Loading         -> {}
-			is State.Error        -> {}
 			is State.ShowArticles -> articlesAdapter.submitList(state.articles)
+		}
+	}
+	
+	private fun bindOneShot(oneShot: OneShot) {
+		when (oneShot) {
+			is OneShot.OpenArticle -> ArticleFragment.open(
+				oneShot.article, requireActivity().supportFragmentManager
+			)
+			is OneShot.ShowError   -> Snackbar.show(oneShot.message, binding.root)
 		}
 	}
 }

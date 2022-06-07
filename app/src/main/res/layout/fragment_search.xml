@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/appBar"
         style="@style/AppBar"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,14 +19,20 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/normal"
             app:srcCompat="@drawable/ic_logo" />
-    </FrameLayout>
+
+        <include
+            android:id="@+id/search_bar"
+            layout="@layout/layout_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/normal" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/articles"
+        android:id="@+id/adapter"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingTop="@dimen/normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

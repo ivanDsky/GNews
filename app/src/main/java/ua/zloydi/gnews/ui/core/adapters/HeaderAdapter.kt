@@ -6,6 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import ua.zloydi.gnews.databinding.LayoutHeaderBinding
 
 class HeaderAdapter(private val title: String) : RecyclerView.Adapter<HeaderAdapter.ViewHolder>() {
+	companion object {
+		const val HEADER_VIEW_TYPE = -1
+	}
+	
+	override fun getItemViewType(position: Int) = HEADER_VIEW_TYPE
+	
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 		val inflater = LayoutInflater.from(parent.context)
 		return ViewHolder(LayoutHeaderBinding.inflate(inflater, parent, false), title)

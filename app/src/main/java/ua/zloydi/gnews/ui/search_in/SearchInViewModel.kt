@@ -1,6 +1,7 @@
 package ua.zloydi.gnews.ui.search_in
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import ua.zloydi.gnews.data.query.SearchIn
@@ -11,11 +12,15 @@ data class SearchInState(
 
 private const val ENABLED_DEFAULT = true
 
-class SearchInViewModel : ViewModel() {
+class SearchInViewModel(startList: List<SearchIn>) : ViewModel() {
 	private val _state: MutableStateFlow<List<SearchInState>>
 	
 	init {
-		val initList = SearchIn.values().map { SearchInState(it, ENABLED_DEFAULT) }
+		val initList = if (startList.isEmpty()) {
+			SearchIn.values().map { SearchInState(it, ENABLED_DEFAULT) }
+		} else {
+			SearchIn.values().map { SearchInState(it, startList.contains(it)) }
+		}
 		_state = MutableStateFlow(initList)
 	}
 	
@@ -33,4 +38,12 @@ class SearchInViewModel : ViewModel() {
 	}
 	
 	fun getResult(): List<SearchIn> = _state.value.filter { it.isEnabled }.map { it.searchIn }
+	
+	class Factory(private val startList: List<SearchIn>) : ViewModelProvider.Factory {
+		override fun <T : ViewModel> create(modelClass: Class<T>): T {
+			if (modelClass == SearchInViewModel::class.java) return SearchInViewModel(startList) as T
+			throw IllegalStateException("Incorrect type")
+		}
+	}
+	
 }

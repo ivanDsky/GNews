@@ -15,4 +15,9 @@
     <string name="content">Content</string>
     <string name="apply">Apply</string>
     <string name="apply_filter">Apply filter</string>
+    <string name="x_news">%d news</string>
+    <string name="search_history">Search history</string>
+    <string name="published_at">Upload date</string>
+    <string name="relevance">Relevance</string>
+    <string name="sort_by">Sort by</string>
 </resources>
