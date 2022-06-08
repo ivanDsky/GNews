@@ -8,11 +8,11 @@ image loading, Retrofit for server requests and Datastore as asynchronous Shared
 Screenshots
 -----------
 
-|   Headlines   |  Search History   | Filter |
-|:-------------:|:-----------------:|:------:|
-|     ![6]      |       ![7]        |  ![8]  |
-| __Search in__ | __Search result__ |        |
-|     ![9]      |       ![10]       |        |
+|                      Headlines                      |                  Search History                   |                      Filter                      |
+|:---------------------------------------------------:|:-------------------------------------------------:|:------------------------------------------------:|
+| <img src="screenshots/headlines.jpg" width="250" /> | <img src="screenshots/history.jpg" width="250" /> | <img src="screenshots/filter.jpg" width="250" /> |
+|                    __Search in__                    |                 __Search result__                 |                                                  |
+|   <img src="screenshots/sort.jpg" width="250" />    | <img src="screenshots/result.jpg" width="250" />  |                                                  |
 
 Libraries and APIs used in this project
 ------------------------------
@@ -23,7 +23,7 @@ Libraries and APIs used in this project
 * [Glide][4]
 * [GNews.io][5]
 
-[APK][11]
+[APK][6]
 ---
 
 [1]: https://developer.android.com/kotlin/coroutines
@@ -36,14 +36,4 @@ Libraries and APIs used in this project
 
 [5]: https://gnews.io/
 
-[6]: screenshots/headlines.jpg
-
-[7]: screenshots/history.jpg
-
-[8]: screenshots/filter.jpg
-
-[9]: screenshots/sort.jpg
-
-[10]: screenshots/result.jpg
-
-[11]: GNews_1.0.0.apk
+[6]: GNews_1.0.0.apk
