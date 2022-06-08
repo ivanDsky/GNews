@@ -8,11 +8,11 @@ image loading, Retrofit for server requests and Datastore as asynchronous Shared
 Screenshots
 -----------
 
-|   Headlines   |  Search History   | Filter |
-|:-------------:|:-----------------:|:------:|
-|     ![6]      |       ![7]        |  ![8]  |
-| __Search in__ | __Search result__ |        |
-|     ![9]      |       ![10]       |        |
+| Headlines            | Search History       | Filter          |
+|----------------------|:--------------------:|:---------------:|
+| ![6]                 |         ![7]         |      ![8]       |
+| __Search in__        |  __Search result__   |                 |
+| ![9]                 |        ![10]         |                 |
 
 Libraries and APIs used in this project
 ------------------------------
