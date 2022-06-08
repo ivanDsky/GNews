@@ -8,14 +8,15 @@ image loading, Retrofit for server requests and Datastore as asynchronous Shared
 Screenshots
 -----------
 
-| Headlines            | Search History       | Filter          |
-|----------------------|:--------------------:|:---------------:|
-| ![6]                 |         ![7]         |      ![8]       |
-| __Search in__        |  __Search result__   |                 |
-| ![9]                 |        ![10]         |                 |
+|   Headlines   |  Search History   | Filter |
+|:-------------:|:-----------------:|:------:|
+|     ![6]      |       ![7]        |  ![8]  |
+| __Search in__ | __Search result__ |        |
+|     ![9]      |       ![10]       |        |
 
 Libraries and APIs used in this project
 ------------------------------
+
 * [Coroutines][1]
 * [DataStore][2]
 * [Retrofit][3]
@@ -45,4 +46,4 @@ Libraries and APIs used in this project
 
 [10]: screenshots/result.jpg
 
-[11]: app/release/GNews_1.0.0.apk
+[11]: GNews_1.0.0.apk
