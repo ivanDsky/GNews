@@ -27,8 +27,8 @@ class RemoteDataSource @Inject constructor(
 	
 	private suspend fun <T> handleResponse(tryResponse: suspend () -> Response<T>) =
 		withContext(Dispatchers.IO) {
-			val response = tryResponse()
 			try {
+				val response = tryResponse()
 				when {
 					response.isSuccessful.not() -> Result.failure(
 						NetworkError.getErrorByCode(

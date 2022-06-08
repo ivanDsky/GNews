@@ -56,10 +56,9 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 			launch { viewModel.searchState.collect(::bindSearchState) }
 			launch { viewModel.oneShot.collect(::bindOneShot) }
 		}
-		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-			if (!viewModel.isSearchEmpty())
-				viewModel.setHistoryScreen()
-			else{
+		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+			if (!viewModel.isSearchEmpty()) viewModel.setHistoryScreen()
+			else {
 				remove()
 				requireActivity().onBackPressed()
 			}
@@ -84,6 +83,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 		adapter.layoutManager = LinearLayoutManager(requireContext())
 		
 		bindSearchBar()
+		
+		binding.error.retry.setOnClickListener { viewModel.search() }
 	}
 	
 	private fun bindSearchBar() = with(binding.searchBar) {
@@ -110,6 +111,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 	private fun bindState(state: State) = when (state) {
 		is State.Empty        -> setLoading(true)
 		is State.Loading      -> setLoading(true)
+		is State.Error        -> setError(state)
 		is State.ShowArticles -> {
 			bindArticles(state)
 			setLoading(false)
@@ -120,9 +122,17 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 		}
 	}
 	
+	private fun setError(state: State.Error) {
+		binding.error.root.isVisible = true
+		binding.progress.isVisible = false
+		binding.adapter.isVisible = false
+		binding.error.header.text = state.message
+	}
+	
 	private fun setLoading(isLoading: Boolean) {
 		binding.progress.isVisible = isLoading
 		binding.adapter.isVisible = !isLoading
+		binding.error.root.isVisible = false
 	}
 	
 	private val historyDecorator: HeaderBodyDecorator by lazy {
@@ -192,7 +202,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 			
 			override fun onStop(owner: LifecycleOwner) {
 				super.onStop(owner)
-				binding.searchBar.btnSort.backgroundTintList = getColorList(R.attr.colorSurfaceVariant)
+				binding.searchBar.btnSort.backgroundTintList =
+					getColorList(R.attr.colorSurfaceVariant)
 				binding.searchBar.btnSort.imageTintList = getColorList(R.attr.colorOnPrimary)
 			}
 		})
@@ -204,7 +215,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 	
 	private fun getColorList(@AttrRes res: Int) =
 		ColorStateList.valueOf(requireContext().getThemeColor(res))
-	
 	
 	private fun search() {
 		requireContext().getSystemService<InputMethodManager>()

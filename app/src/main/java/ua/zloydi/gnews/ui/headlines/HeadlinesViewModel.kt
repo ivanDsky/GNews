@@ -21,6 +21,7 @@ import javax.inject.Inject
 sealed class State {
 	object Loading : State()
 	class ShowArticles(val articles: List<ArticleUI>) : State()
+	class Error(val message: String) : State()
 }
 
 @HiltViewModel
@@ -34,9 +35,11 @@ class HeadlinesViewModel @Inject constructor(
 	val oneShot = _oneShot.receiveAsFlow()
 	
 	init {
-		viewModelScope.launch {
-			loadHeadlines()
-		}
+		search()
+	}
+	
+	fun search() = viewModelScope.launch {
+		loadHeadlines()
 	}
 	
 	private suspend fun loadHeadlines() = withContext(Dispatchers.IO) {
@@ -44,7 +47,9 @@ class HeadlinesViewModel @Inject constructor(
 		repository.getHeadlineArticles().onSuccess { articles: ArticleListDTO ->
 			_state.value = State.ShowArticles(articles.toUI())
 		}.onFailure { error: Throwable ->
-			_oneShot.send(OneShot.ShowError(error.message ?: "Error"))
+			val message = error.message ?: "Error"
+			_state.value = State.Error(message)
+			_oneShot.send(OneShot.ShowError(message))
 		}
 	}
 	

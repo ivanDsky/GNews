@@ -20,4 +20,6 @@
     <string name="published_at">Upload date</string>
     <string name="relevance">Relevance</string>
     <string name="sort_by">Sort by</string>
+    <string name="retry">Retry</string>
+    <string name="error">Error</string>
 </resources>

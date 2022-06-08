@@ -55,6 +55,9 @@ class HeadlinesFragment : BindingFragment<FragmentHeadlinesBinding>() {
 				itemRect = Rect(normalDp, smallDp / 2, normalDp, smallDp / 2),
 			)
 		)
+		
+		
+		binding.error.retry.setOnClickListener { viewModel.search() }
 	}
 	
 	private fun bindState(state: State) {
@@ -64,12 +67,21 @@ class HeadlinesFragment : BindingFragment<FragmentHeadlinesBinding>() {
 				articlesAdapter.submitList(state.articles)
 				setLoading(false)
 			}
+			is State.Error        -> setError(state)
 		}
+	}
+	
+	private fun setError(error: State.Error) {
+		binding.error.root.isVisible = true
+		binding.progress.isVisible = false
+		binding.articles.isVisible = false
+		binding.error.header.text = error.message
 	}
 	
 	private fun setLoading(isLoading: Boolean) {
 		binding.progress.isVisible = isLoading
 		binding.articles.isVisible = !isLoading
+		binding.error.root.isVisible = false
 	}
 	
 	private fun bindOneShot(oneShot: OneShot) {

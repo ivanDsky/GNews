@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ua.zloydi.gnews.R
 import ua.zloydi.gnews.data.models.ArticleDTO
+import ua.zloydi.gnews.data.models.ArticleListDTO
 import ua.zloydi.gnews.data.models.HistoryQuery
 import ua.zloydi.gnews.data.query.Filter
 import ua.zloydi.gnews.data.query.Query
@@ -31,6 +32,7 @@ sealed class State {
 	class Empty : State()
 	class ShowHistory(val history: List<SearchHistoryUI>) : State()
 	class Loading : State()
+	class Error(val message: String) : State()
 	class ShowArticles(val totalArticles: String, val articles: List<ArticleUI>) : State()
 }
 
@@ -83,15 +85,15 @@ class SearchViewModel @Inject constructor(
 		if (isSearchEmpty()) return@launch
 		_state.value = State.Loading()
 		addQuery(_queryState.value)
-		val articlesResult = articlesRepository.getArticles(_queryState.value)
-		if (articlesResult.isSuccess) {
-			val articles = articlesResult.getOrThrow()
+		articlesRepository.getArticles(_queryState.value).onSuccess { articles: ArticleListDTO ->
 			_state.value = State.ShowArticles(
 				resources.getString(R.string.x_news, articles.totalArticles),
 				articles.articles.toUI()
 			)
-		} else {
-			_oneShot.send(OneShot.ShowError(articlesResult.exceptionOrNull()?.message ?: "Error"))
+		}.onFailure { error: Throwable ->
+			val message = error.message ?: "Error"
+			_state.value = State.Error(message)
+			_oneShot.send(OneShot.ShowError(message))
 		}
 	}
 	
